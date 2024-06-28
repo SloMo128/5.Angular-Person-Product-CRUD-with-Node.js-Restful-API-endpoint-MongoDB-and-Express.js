@@ -10,6 +10,7 @@ import { AppRoutingProductModule } from './Routing/app-routing.product.module';
 import { PageNotFoundComponent } from './Pages/Page-not-found/page.not.found.component';
 import { HomeComponent } from './Pages/Home/home.component';
 import { HeaderComponent } from './Shared/header/header.component';
+import { FooterComponent } from './Shared/footer/footer.component';
 
 import { PersonApiService } from './Services/person.service';
 import { PersonListComponent } from './Pages/Persons/Person-List/person.list.component';
@@ -27,6 +28,7 @@ import { ProductCreateComponent } from './Pages/Products/Product-Create/product.
     AppComponent,
     PageNotFoundComponent,
     HomeComponent,
+    FooterComponent,
     HeaderComponent,
     PersonListComponent,
     PersonEditComponent,

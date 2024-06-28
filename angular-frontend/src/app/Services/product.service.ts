@@ -34,6 +34,14 @@ export class ProductApiService {
             .pipe(catchError((err) => this.handleError('PUT', err)));
     }
 
+    addProduct(peoduct: Product): Observable<Product> {
+        const headers = { 'content-type': 'application/json' }
+        const body = JSON.stringify(peoduct);
+        console.log(body)
+        return this.http.post<Product>(this.baseURL + 'addproduct', body, { 'headers': headers })
+          .pipe(catchError((err) => this.handleError('POST', err)));
+      }
+
     private handleError(method: string, error: HttpErrorResponse) {
         console.log(`Cannot ${method}`);
         const errObj = {
@@ -41,6 +49,7 @@ export class ProductApiService {
             type: 'error',
             msg: '',
         };
+        
         switch (error.status) {
             // json-server not running
             case 0:

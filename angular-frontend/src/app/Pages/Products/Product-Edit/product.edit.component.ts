@@ -39,9 +39,9 @@ export class ProductEditComponent implements OnInit {
 
         this.editForm = this.fb.group({
             title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20),
-            Validators.pattern("^[a-zA-Z ]+$")]],
+            Validators.pattern("^[a-zA-Z0-9 ]+$")]],
             description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40),
-            Validators.pattern("^[a-zA-Z ]+$")]],
+            Validators.pattern("^[a-zA-Z0-9 ]+$")]],
             company: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15),
             Validators.pattern("^[a-zA-Z ]+$")]],
             price: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10),
@@ -68,7 +68,7 @@ export class ProductEditComponent implements OnInit {
         this.productService.updateProduct(this.data, this.editForm.value).subscribe({
             next: (data) => {
                 this.feedback = { feedbackType: 'success', feedbackmsg: 'Porduct updated successfully!' };
-                setTimeout(() => this.router.navigate(['/person-edit']), 4000);
+                setTimeout(() => this.router.navigate(['/personedit']), 4000);
 
                 localStorage.removeItem('productId');
             },

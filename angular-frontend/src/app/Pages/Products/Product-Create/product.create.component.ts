@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
-import { PersonApiService } from 'src/app/Services/person.service';
+import { ProductApiService } from 'src/app/Services/product.service';
+import { Product } from 'src/app/Models/product.moddel';
 import { FeedBack } from 'src/app/Models/feedback';
 
 @Component({
@@ -11,65 +13,79 @@ import { FeedBack } from 'src/app/Models/feedback';
 
 export class ProductCreateComponent implements OnInit {
 
+    createForm: FormGroup;
+    products: Product[] = []
+    product = new Product("", "", "", "");
     feedback = new FeedBack("", "");
-    addForm: FormGroup;
+    data: string;
     isLoading: boolean = true;
 
-
     constructor(
-        private personService: PersonApiService,
+        private productService: ProductApiService,
         private fb: FormBuilder,
-        private actRoute: ActivatedRoute,
         private router: Router,
-    ) {}
+    ) { }
 
     ngOnInit() {
 
-        localStorage.removeItem('personId');
-
         this.feedback = { feedbackType: '', feedbackmsg: '' };
 
-        this.addForm = this.fb.group({
-            firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10),
-            Validators.pattern("^[a-zA-Z]+$")]],
-            lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10),
-            Validators.pattern("^[a-zA-Z]+$")]],
-            email: ['', [Validators.required, Validators.email]]
-
+        this.createForm = this.fb.group({
+            title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20),
+            Validators.pattern("^[a-zA-Z0-9 ]+$")]],
+            description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40),
+            Validators.pattern("^[a-zA-Z0-9 ]+$")]],
+            company: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15),
+            Validators.pattern("^[a-zA-Z ]+$")]],
+            price: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10),
+            Validators.pattern("^[0-9]{1,10}")]],
+            person:['']
         });
+        
+        const valuePersonId = localStorage.getItem('personId')
+        if(valuePersonId){
+            this.createForm.patchValue({person: valuePersonId});
+        }
     }
 
     onSubmit() {
-        if (window.confirm("Are you sure you want to create this new person?")) {
-            this.personService.addPerson(this.addForm.value).subscribe({
-                next: (data) => {
-                    this.feedback = { feedbackType: 'success', feedbackmsg: 'Person created successfully' };
-                    setTimeout(() => this.router.navigate(['/listperson']), 4000); // Navigate to the list or some other view
-                },
-                error: (err: any) => {
-                    console.log(err);
-                    this.isLoading = false;
-                    this.feedback = {
-                        feedbackType: err.type,
-                        feedbackmsg: err.msg,
-                    };
-                },
-                complete: () => {
-                    this.isLoading = true;
-                },
-            });
-        } else { }
+        this.productService.addProduct(this.createForm.value).subscribe({
+            next: (data) => {
+                this.feedback = { feedbackType: 'success', feedbackmsg: 'Porduct add successfully!' };
+                setTimeout(() => this.router.navigate(['/personedit']), 4000);
+
+                localStorage.removeItem('personId');
+            },
+            error: (err: any) => {
+                console.log(err);
+                this.isLoading = false;
+                this.feedback = {
+                    feedbackType: err.type,
+                    feedbackmsg: err.msg,
+                };
+            },
+            complete: () => {
+            },
+        });
+    
+    }
+    get title() {
+        return this.createForm.get('title');
     }
 
-    get firstname() {
-        return this.addForm.get('firstname');
+    get description() {
+        return this.createForm.get('description');
     }
 
-    get email() {
-        return this.addForm.get('email');
+    get price() {
+        return this.createForm.get('price');
     }
 
-    get lastname() {
-        return this.addForm.get('lastname');
+    get company() {
+        return this.createForm.get('company');
+    }
+
+    get person() {
+        return this.createForm.get('person');
     }
 }

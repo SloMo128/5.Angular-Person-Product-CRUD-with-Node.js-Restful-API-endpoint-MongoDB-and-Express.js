@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
 
     products: Product[] = [];
     feedback = new FeedBack("", "");
-    isLoading: boolean = true;
+    isLoadingProduct: boolean = true;
     data: string;
 
     constructor(
@@ -49,7 +49,7 @@ export class ProductListComponent implements OnInit {
 
             },
             error: (err: any) => {
-                this.isLoading = false;
+                this.isLoadingProduct = false;
                 console.log(err);
                 this.feedback = {
                     feedbackType: err.type,
@@ -57,7 +57,7 @@ export class ProductListComponent implements OnInit {
                 };
             },
             complete: () => {
-                this.isLoading = true;
+                this.isLoadingProduct = true;
                 this.feedback = { feedbackType: 'success', feedbackmsg: 'loaded' };
             },
         });
@@ -71,7 +71,7 @@ export class ProductListComponent implements OnInit {
                     this.products.splice(index, 1);
                 },
                 error: (err: any) => {
-                    this.isLoading = false;
+                    this.isLoadingProduct = false;
                     console.log(err);
                     this.feedback = {
                         feedbackType: err.type,

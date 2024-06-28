@@ -23,28 +23,28 @@
         <!-- form card register -->
         <div class="card card-outline-secondary">
             <div class="card-header">
-                <h3 class="mb-0">Add new Person</h3>
+                <h3 class="mb-0">Edit Product</h3>
             </div>
 
             <div class="card-body" style="text-align:center">
-                <form novalidate [formGroup]="addForm" (ngSubmit)="onSubmit()">
+                <form novalidate [formGroup]="createForm" (ngSubmit)="onSubmit()">
                     <div>
                         <p>
-                            <label for="firstname">Firstname</label>
-                            <input type="text" id="firstname" firstname="firstname" class="form-control"
-                                formControlName="firstname" [ngClass]="{'is-invalid': firstname.invalid && firstname.dirty,
-                                              'is-valid': firstname.valid && firstname.dirty}">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" title="title" class="form-control" formControlName="title"
+                                [ngClass]="{'is-invalid': title.invalid && title.dirty,
+                                              'is-valid': title.valid && title.dirty}">
                         </p>
-                        <div *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)" class="error">
-                            <div *ngIf="firstname.errors.required">
-                                firstname is required</div>
-                            <div *ngIf="firstname.errors.minlength && firstname.touched">
-                                firstname Minimum Length is {{ firstname.errors.minlength.requiredLength }}
+                        <div *ngIf="!title.valid && (title.dirty || title.touched)" class="error">
+                            <div *ngIf="title.errors.required">
+                                title is required</div>
+                            <div *ngIf="title.errors.minlength && title.touched">
+                                title Minimum Length is {{ title.errors.minlength.requiredLength }}
                             </div>
-                            <div *ngIf="firstname.errors.maxlength && firstname.touched">
-                                firstname Maximum Length is {{ firstname.errors.maxlength.requiredLength }}
+                            <div *ngIf="title.errors.maxlength && title.touched">
+                                title Maximum Length is {{ title.errors.maxlength.requiredLength }}
                             </div>
-                            <div *ngIf="firstname.errors.pattern">
+                            <div *ngIf="title.errors.pattern">
                                 Only characters - not spaces - are allowed.
                             </div>
                         </div>
@@ -53,21 +53,21 @@
 
                     <div>
                         <p>
-                            <label for="lastname">Lastname</label>
-                            <input type="text" id="lastname" firstname="lastname" formControlName="lastname"
-                                class="form-control" [ngClass]="{'is-invalid': lastname.invalid && lastname.dirty,
-                  'is-valid': lastname.valid && lastname.dirty}">
+                            <label for="description">Description</label>
+                            <input type="text" id="description" title="description" formControlName="description"
+                                class="form-control" [ngClass]="{'is-invalid': description.invalid && description.dirty,
+                                                                 'is-valid': description.valid && description.dirty}">
                         </p>
-                        <div *ngIf="!lastname.valid && (lastname.dirty || lastname.touched)" class="error">
-                            <div *ngIf="lastname.errors.required">
-                                lastname is required</div>
-                            <div *ngIf="lastname.errors.minlength && lastname.touched">
-                                lastname Minimum Length is {{ lastname.errors.minlength.requiredLength }}
+                        <div *ngIf="!description.valid && (description.dirty || description.touched)" class="error">
+                            <div *ngIf="description.errors.required">
+                                description is required</div>
+                            <div *ngIf="description.errors.minlength && description.touched">
+                                description Minimum Length is {{ description.errors.minlength.requiredLength }}
                             </div>
-                            <div *ngIf="lastname.errors.maxlength && lastname.touched">
-                                lastname Maximum Length is {{ lastname.errors.maxlength.requiredLength }}
+                            <div *ngIf="description.errors.maxlength && description.touched">
+                                description Maximum Length is {{ description.errors.maxlength.requiredLength }}
                             </div>
-                            <div *ngIf="lastname.errors.pattern">
+                            <div *ngIf="description.errors.pattern">
                                 Only characters - not spaces - are allowed.
                             </div>
                         </div>
@@ -75,31 +75,53 @@
 
                     <div>
                         <p>
-                            <label for="email">E-mail</label>
-                            <input type="text" id="email" firstname="email" class="form-control" formControlName="email"
-                                [ngClass]="{'is-invalid': email.invalid && email.dirty,
-                                              'is-valid': email.valid && email.dirty}">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" title="company" class="form-control"
+                                formControlName="company" [ngClass]="{'is-invalid': company.invalid && company.dirty,
+                                              'is-valid': company.valid && company.dirty}">
                         </p>
-                        <div *ngIf="!email.valid && (email.dirty || email.touched)" class="error">
-                            <p *ngIf="email.errors.required">
-                                email is required
-                            </p>
-                            <p *ngIf="email.errors.minlength && email.touched">
-                                email Minimum Length is {{ email.errors.minlength.requiredLength }}
-                            </p>
-                            <p *ngIf="email.errors.maxlength && email.touched">
-                                email Maximum Length is {{ email.errors.maxlength.requiredLength }}
-                            </p>
-                            <p *ngIf="email.errors.pattern">
+                        <div *ngIf="!company.valid && (company.dirty || company.touched)" class="error">
+                            <div *ngIf="company.errors.required">
+                                company is required
+                            </div>
+                            <div *ngIf="company.errors.minlength && company.touched">
+                                company Minimum Length is {{ company.errors.minlength.requiredLength }}
+                            </div>
+                            <div *ngIf="company.errors.maxlength && company.touched">
+                                company Maximum Length is {{ company.errors.maxlength.requiredLength }}
+                            </div>
+                            <div *ngIf="company.errors.pattern">
                                 Only characters - not spaces - are allowed.
-                            </p>
+                            </div>
                         </div>
-
                     </div>
 
-
-                    <button class="btn btn-success" type="submit" [disabled]="!addForm.valid">Create</button><br><br>
-                    <a class="btn btn-success" [routerLink]="['/listperson']">Back to person list</a>
+                    <div>
+                        <p>
+                            <label for="price">Price</label>
+                            <input type="text" id="price" title="price" class="form-control" formControlName="price"
+                                [ngClass]="{'is-invalid': price.invalid && price.dirty,
+                                              'is-valid': price.valid && price.dirty}">
+                        </p>
+                        <div *ngIf="!price.valid && (price.dirty ||price.touched)">
+                            <div *ngIf="price.errors.pattern">
+                                Only number are allowed
+                            </div>
+                            <div *ngIf="price.errors.required">
+                                price is required
+                            </div>
+                            <div *ngIf="price.errors.maxLength && price.touched">
+                                Max length allowed is {{price.errors.maxlength?.requiredLength}}
+                            </div>
+                            <div *ngIf="price.errors.minlength && price.touched">
+                                Minimum Length is {{ price.errors.minlength.requiredLength }}
+                            </div>
+                            <input type="hidden" name="person" value="person">
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-success" type="submit" [disabled]="!createForm.valid">ADD Aproduct</button><br><br>
+                    <a class="btn btn-success" [routerLink]="['/personedit']">Back to person product list</a>
                 </form>
             </div>
         </div>
