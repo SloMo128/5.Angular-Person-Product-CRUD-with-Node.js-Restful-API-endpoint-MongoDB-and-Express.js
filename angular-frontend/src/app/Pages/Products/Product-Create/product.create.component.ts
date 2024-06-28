@@ -44,7 +44,7 @@ export class ProductCreateComponent implements OnInit {
             this.personService.addPerson(this.addForm.value).subscribe({
                 next: (data) => {
                     this.feedback = { feedbackType: 'success', feedbackmsg: 'Person created successfully' };
-                    setTimeout(() => this.router.navigate(['/person-list']), 4000); // Navigate to the list or some other view
+                    setTimeout(() => this.router.navigate(['/listperson']), 4000); // Navigate to the list or some other view
                 },
                 error: (err: any) => {
                     console.log(err);

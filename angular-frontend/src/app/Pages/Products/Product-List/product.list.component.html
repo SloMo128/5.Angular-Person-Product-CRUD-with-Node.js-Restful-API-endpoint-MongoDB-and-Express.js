@@ -1,36 +1,44 @@
 <div *ngIf="!isLoading && feedback.feedbackType === 'error'" class="text-center">
-    <div class="alert alert-success" [ngClass]="feedback.feedbackType === 'success'
+  <div class="alert alert-success" [ngClass]="feedback.feedbackType === 'success'
             ? 'alert-success'
             : 'alert-danger'
         " role="alert" style="height: 50px" [ngStyle]="!feedback.feedbackmsg">
-      {{
-      feedback.feedbackType === "error"
-      ? feedback.feedbackmsg + " Please try again later."
-      : ""
-      }}
-    </div>
+    {{
+    feedback.feedbackType === "error"
+    ? feedback.feedbackmsg + " Please try again later."
+    : ""
+    }}
   </div>
-  
-  <table class="table table-bordered">
-    <thead class="thead-light">
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Company</th>
-        <th>Price</th>
-        <th>Update</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products let i = index">
-        <td><a [routerLink]="['/product-edit/']" (click)="saveDataAndNavigate(product._id)">{{product.title}}</a></td>
-        <td>{{product.description}}</td>
-        <td>{{product.company}}</td>
-        <td>{{product.price}}</td>
-        <td>
-           <button (click)="saveDataAndNavigate(product._id)" style="margin-left: 20px;" class="btn btn-info"> Edit</button>
-          <button (click)="deleteProduct(product._id, i)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+</div>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Company</th>
+      <th>Price</th>
+      <th>Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products let i = index">
+      <td><a [routerLink]="['/productedit/']" (click)="saveDataAndNavigate(product._id)">{{product.title}}</a></td>
+      <td>{{product.description}}</td>
+      <td>{{product.company}}</td>
+      <td>{{product.price}}</td>
+
+      <td class="text-center">
+        <button type="submit" (click)="saveDataAndNavigate(product._id)" style="background-color:rgb(22, 218, 22)"
+          class="btn btn-success">
+          <img src="assets\img\edit.png" Style="width:30px;height:30px" />
+        </button>
+
+        <button type="submit" (click)="deleteProduct(product._id, i)" style="background-color:red"
+          class="btn btn-danger">
+          <img src="assets\img\delete.png" Style="width:30px;height:30px" />
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

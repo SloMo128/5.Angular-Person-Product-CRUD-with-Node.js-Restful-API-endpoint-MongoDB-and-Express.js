@@ -18,7 +18,7 @@ export class ProductApiService {
     }
 
     deleteProduct(id: string): Observable<Product> {
-        return this.http.delete<Product>(this.baseURL + 'delete/' + id)
+        return this.http.delete<Product>(this.baseURL + 'deleteproduct/' + id)
             .pipe(catchError((err) => this.handleError('DELETE', err)));
     }
 
@@ -30,7 +30,7 @@ export class ProductApiService {
     updateProduct(id: string, product: Product): Observable<Product> {
         const headers = { 'content-type': 'application/json' }
         const body = JSON.stringify(product);
-        return this.http.put<Product>(this.baseURL + "update/" + id, body, { 'headers': headers })
+        return this.http.put<Product>(this.baseURL + "updateproduct/" + id, body, { 'headers': headers })
             .pipe(catchError((err) => this.handleError('PUT', err)));
     }
 

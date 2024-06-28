@@ -6,4 +6,4 @@ const PersonSchema = mongoose.Schema({
   email: String,
 });
 
-module.exports = mongoose.model('persons2', PersonSchema);
+module.exports = mongoose.model('person2', PersonSchema);

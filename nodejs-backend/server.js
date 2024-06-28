@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
 });
 
 // Configuring the database
-const config = require('./config/config');
+const config = require('./Config/config');
 
 // With Mongoose 5, we have to remove: "mongoose.Promise = global.Promise"
 // That line was used to address the below deprecation warning with promises in Mongoose 4:
@@ -35,7 +35,7 @@ mongoose.set('useFindAndModify', false);
 
 // Connecting to the database
 mongoose.connect(config.url, {
-    useNewUrlParser: true, dbName: "ClusterANGULAR"
+    useNewUrlParser: true, dbName: "clusterANGULAR"
 }).then(() => {
     console.log("Successfully connected to the database");
 }).catch(err => {

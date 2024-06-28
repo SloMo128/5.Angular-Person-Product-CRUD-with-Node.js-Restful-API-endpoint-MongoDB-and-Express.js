@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js"
   },
-  "author": "simone meniconi",
+  "author": "Alessandro",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",

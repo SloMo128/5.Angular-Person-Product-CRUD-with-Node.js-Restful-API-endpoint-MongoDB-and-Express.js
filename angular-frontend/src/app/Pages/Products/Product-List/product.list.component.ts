@@ -84,6 +84,6 @@ export class ProductListComponent implements OnInit {
 
     saveDataAndNavigate(id: string) {
         localStorage.setItem('productId', id);
-        this.router.navigate(['/product-edit/']);
+        this.router.navigate(['/productedit/']);
     }
 }

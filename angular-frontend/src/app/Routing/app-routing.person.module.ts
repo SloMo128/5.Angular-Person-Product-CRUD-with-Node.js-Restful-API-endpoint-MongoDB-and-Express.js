@@ -12,11 +12,11 @@ import { ProductCreateComponent } from '../Pages/Products/Product-Create/product
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'person-list', component: PersonListComponent },
-  { path: 'person-edit', component: PersonEditComponent },
-  { path: 'person-create', component: PersonCreateComponent },
-  { path: 'product-edit', component: ProductEditComponent },
-  { path: 'product-create', component: ProductCreateComponent },
+  { path: 'listperson', component: PersonListComponent },
+  { path: 'personedit', component: PersonEditComponent },
+  { path: 'personcreate', component: PersonCreateComponent },
+  { path: 'productedit', component: ProductEditComponent },
+  { path: 'productcreate', component: ProductCreateComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

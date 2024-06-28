@@ -5,7 +5,7 @@ const ProductSchema = mongoose.Schema({
   description: String,
   price: Number,
   company: String,
-  person: { type: mongoose.Schema.Types.ObjectId, ref: 'persons2' },
+  person: { type: mongoose.Schema.Types.ObjectId, ref: 'person2' },
 });
 
-module.exports = mongoose.model('products2', ProductSchema);
+module.exports = mongoose.model('product2', ProductSchema);

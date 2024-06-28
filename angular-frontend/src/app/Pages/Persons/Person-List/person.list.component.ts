@@ -75,6 +75,6 @@ export class PersonListComponent implements OnInit {
 
     saveDataAndNavigate(id: string) {
         localStorage.setItem('personId', id);
-        this.router.navigate(['/person-edit/']);
+        this.router.navigate(['/personedit/']);
     }
 }

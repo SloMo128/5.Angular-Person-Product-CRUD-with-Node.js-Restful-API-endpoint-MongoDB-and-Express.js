@@ -13,12 +13,12 @@ export class PersonApiService {
     constructor(private http: HttpClient){}
 
     getPeople(): Observable<Person[]> {
-        return this.http.get<Person[]>(this.baseURL + 'list')
+        return this.http.get<Person[]>(this.baseURL + 'listperson')
             .pipe(catchError((err) => this.handleError('GET', err)));
     }
 
     deletePerson(id: string): Observable<Person> {
-        return this.http.delete<Person>(this.baseURL + 'delete/' + id)
+        return this.http.delete<Person>(this.baseURL + 'deleteperson/' + id)
             .pipe(catchError((err) => this.handleError('DELETE', err)));
     }
 
@@ -30,7 +30,7 @@ export class PersonApiService {
     updatePerson(id: string, person: Person): Observable<Person> {
         const headers = { 'content-type': 'application/json' }
         const body = JSON.stringify(person);
-        return this.http.put<Person>(this.baseURL + "update/" + id, body, { 'headers': headers })
+        return this.http.put<Person>(this.baseURL + "updateperson/" + id, body, { 'headers': headers })
             .pipe(catchError((err) => this.handleError('PUT', err)));
     }
 
