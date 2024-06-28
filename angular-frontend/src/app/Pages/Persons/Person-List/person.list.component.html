@@ -1,0 +1,36 @@
+<div *ngIf="!isLoading && feedback.feedbackType === 'error'" class="text-center">
+    <div class="alert alert-success" [ngClass]="feedback.feedbackType === 'success'
+            ? 'alert-success'
+            : 'alert-danger'
+        " role="alert" style="height: 50px" [ngStyle]="!feedback.feedbackmsg">
+      {{
+      feedback.feedbackType === "error"
+      ? feedback.feedbackmsg + " Please try again later."
+      : ""
+      }}
+    </div>
+  </div>
+  
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>Id</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>E-Mail</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of people let i = index">
+        <td>{{person._id}}</td>
+        <td><a [routerLink]="['/person-edit/']" (click)="saveDataAndNavigate(person._id)">{{person.firstname}}</a></td>
+        <td>{{person.lastname}}</td>
+        <td>{{person.email}}</td>
+        <td>
+           <button (click)="saveDataAndNavigate(person._id)" style="margin-left: 20px;" class="btn btn-info"> Edit</button>
+          <button (click)="deletePerson(person._id, i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
