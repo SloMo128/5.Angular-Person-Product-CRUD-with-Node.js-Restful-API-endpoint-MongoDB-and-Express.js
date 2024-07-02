@@ -45,8 +45,7 @@ export class ProductListComponent implements OnInit {
             next: (data: Product[]) => {
                 if (data.length !== 0) {
                     this.products = data;
-                };
-
+                }
             },
             error: (err: any) => {
                 this.isLoadingProduct = false;

@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading && feedback.feedbackType === 'error'" class="text-center">
+<div *ngIf="!isLoadingProduct && feedback.feedbackType === 'error'" class="text-center">
   <div class="alert alert-success" [ngClass]="feedback.feedbackType === 'success'
             ? 'alert-success'
             : 'alert-danger'
@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<table class="table table-bordered">
+<table class="table table-bordered" *ngIf="isLoadingProduct && feedback.feedbackType === 'success'">
   <thead class="thead-light">
     <tr>
       <th>Title</th>

@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
-import { AppRoutingPersonModule } from './Routing/app-routing.person.module'; 
+import { AppRoutingPersonModule } from './Routing/app-routing.person.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingProductModule } from './Routing/app-routing.product.module';
 
@@ -17,10 +17,13 @@ import { PersonListComponent } from './Pages/Persons/Person-List/person.list.com
 import { PersonEditComponent } from './Pages/Persons/Person-Edit/person.edit.component';
 import { PersonCreateComponent } from './Pages/Persons/Person-Create/person.create.component';
 
-import { ProductApiService } from './Services/product.service'; 
+import { ProductApiService } from './Services/product.service';
 import { ProductListComponent } from './Pages/Products/Product-List/product.list.component';
 import { ProductEditComponent } from './Pages/Products/Product-Edit/product.edit.component';
 import { ProductCreateComponent } from './Pages/Products/Product-Create/product.create.component';
+
+import { GlobalErrorHandlerService } from './Services/global-error-handler.service';
+import { GlobalHttpInterceptorService } from './Services/global-http-Interceptor.service';
 
 
 @NgModule({
@@ -34,7 +37,7 @@ import { ProductCreateComponent } from './Pages/Products/Product-Create/product.
     PersonEditComponent,
     PersonCreateComponent,
     ProductListComponent,
-    ProductEditComponent,ProductCreateComponent
+    ProductEditComponent, ProductCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,9 @@ import { ProductCreateComponent } from './Pages/Products/Product-Create/product.
   ],
   providers: [
     PersonApiService,
-    ProductApiService
+    ProductApiService,
+    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
   ],
   bootstrap: [AppComponent]
 })
