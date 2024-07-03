@@ -76,6 +76,7 @@ export class ProductListComponent implements OnInit {
                         feedbackType: err.type,
                         feedbackmsg: err.msg,
                     };
+                    throw new Error();
                 }
             });
         }

@@ -37,7 +37,8 @@ import { GlobalHttpInterceptorService } from './Services/global-http-Interceptor
     PersonEditComponent,
     PersonCreateComponent,
     ProductListComponent,
-    ProductEditComponent, ProductCreateComponent
+    ProductEditComponent, 
+    ProductCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +51,7 @@ import { GlobalHttpInterceptorService } from './Services/global-http-Interceptor
     PersonApiService,
     ProductApiService,
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
-    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
+    {provide: ErrorHandler, useClass: GlobalErrorHandlerService}
   ],
   bootstrap: [AppComponent]
 })

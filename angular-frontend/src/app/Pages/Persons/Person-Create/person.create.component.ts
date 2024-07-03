@@ -53,6 +53,7 @@ export class PersonCreateComponent implements OnInit {
                         feedbackType: err.type,
                         feedbackmsg: err.msg,
                     };
+                    throw new Error();
                 },
                 complete: () => {
                     this.isLoading = true;

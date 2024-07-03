@@ -77,6 +77,7 @@ export class PersonEditComponent implements OnInit {
               feedbackType: err.type,
               feedbackmsg: err.msg,
             };
+            throw new Error();
           },
           complete: () => {
           },
