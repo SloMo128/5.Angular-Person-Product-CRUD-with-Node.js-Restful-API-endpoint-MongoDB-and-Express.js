@@ -17,6 +17,7 @@ export class ProductListComponent implements OnInit {
     feedback = new FeedBack("", "");
     isLoadingProduct: boolean = true;
     data: string;
+    isLoggedIn: boolean = false;
 
     constructor(
         private productService: ProductApiService,
@@ -37,6 +38,15 @@ export class ProductListComponent implements OnInit {
         }
 
         this.getProducts(this.data);
+
+        let storeDataAdmin = localStorage.getItem("isAdminLoggedIn");
+        let storeDataUser = localStorage.getItem("isUserLoggedIn");
+
+        if (storeDataUser != null && storeDataUser == "true") {
+            this.isLoggedIn = false;
+        } else if (storeDataAdmin != null && storeDataAdmin == "true") {
+            this.isLoggedIn = true;
+        }
     }
 
     getProducts(id: string): void {
@@ -45,8 +55,7 @@ export class ProductListComponent implements OnInit {
             next: (data: Product[]) => {
                 if (data.length !== 0) {
                     this.products = data;
-                };
-
+                }
             },
             error: (err: any) => {
                 this.isLoadingProduct = false;
@@ -74,9 +83,10 @@ export class ProductListComponent implements OnInit {
                     this.isLoadingProduct = false;
                     console.log(err);
                     this.feedback = {
-                        feedbackType: err.type,
-                        feedbackmsg: err.msg,
+                        feedbackType: err.feedbackType,
+                        feedbackmsg: err.feedbackmsg,
                     };
+                    throw new Error();
                 }
             });
         }

@@ -50,9 +50,10 @@ export class PersonCreateComponent implements OnInit {
                     console.log(err);
                     this.isLoading = false;
                     this.feedback = {
-                        feedbackType: err.type,
-                        feedbackmsg: err.msg,
+                        feedbackType: err.feedbackType,
+                        feedbackmsg: err.feedbackmsg,
                     };
+                    throw new Error();
                 },
                 complete: () => {
                     this.isLoading = true;

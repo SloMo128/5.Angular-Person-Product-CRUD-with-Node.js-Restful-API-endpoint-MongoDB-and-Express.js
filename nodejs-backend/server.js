@@ -56,6 +56,10 @@ app.use(config.apiPersonURL, apiPersonURL);
 const apiProductURL = require('./Routes/routes.product');
 app.use(config.apiProductURL, apiProductURL);
 
+// Activate all possible routes for all REST endpoints and their CRUD operations UserLogin
+const apiUserLoginURL = require('./routes/routes.user.login');
+app.use(config.apiUserLogin, apiUserLoginURL);
+
 // Find 404 and hand over to error handler
 app.get('*', function (req, res) {
     res.send('This is NOT a valid HTTP URL for API RESTful communication!', 404);

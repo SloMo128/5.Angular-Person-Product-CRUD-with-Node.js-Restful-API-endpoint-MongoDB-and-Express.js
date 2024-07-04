@@ -1,8 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { Person } from '../Models/person.model';
 
 @Injectable()
@@ -14,24 +13,24 @@ export class PersonApiService {
 
     getPeople(): Observable<Person[]> {
         return this.http.get<Person[]>(this.baseURL + 'listperson')
-            .pipe(catchError((err) => this.handleError('GET', err)));
+            //.pipe(catchError((err) => this.handleError('GET', err)));
     }
 
     deletePerson(id: string): Observable<Person> {
         return this.http.delete<Person>(this.baseURL + 'deleteperson/' + id)
-            .pipe(catchError((err) => this.handleError('DELETE', err)));
+            //.pipe(catchError((err) => this.handleError('DELETE', err)));
     }
 
     getPerson(id: string): Observable<Person> {
         return this.http.get<Person>(this.baseURL + id)
-            .pipe(catchError((err) => this.handleError('GET', err)));
+            //.pipe(catchError((err) => this.handleError('GET', err)));
     }
 
     updatePerson(id: string, person: Person): Observable<Person> {
         const headers = { 'content-type': 'application/json' }
         const body = JSON.stringify(person);
         return this.http.put<Person>(this.baseURL + "updateperson/" + id, body, { 'headers': headers })
-            .pipe(catchError((err) => this.handleError('PUT', err)));
+            //.pipe(catchError((err) => this.handleError('PUT', err)));
     }
 
     addPerson(person: Person): Observable<Person> {
@@ -39,10 +38,10 @@ export class PersonApiService {
         const body = JSON.stringify(person);
         console.log(body)
         return this.http.post<Person>(this.baseURL + 'addperson', body, { 'headers': headers })
-            .pipe(catchError((err) => this.handleError('POST', err)));
+            //.pipe(catchError((err) => this.handleError('POST', err)));
     }
 
-    private handleError(method: string, error: HttpErrorResponse) {
+    /*private handleError(method: string, error: HttpErrorResponse) {
         console.log(`Cannot ${method}`);
         const errObj = {
             err: error,
@@ -70,6 +69,6 @@ export class PersonApiService {
                 errObj.msg = 'An error occurred.';
         }
         return throwError(errObj);
-    }
+    }*/
 
 }
