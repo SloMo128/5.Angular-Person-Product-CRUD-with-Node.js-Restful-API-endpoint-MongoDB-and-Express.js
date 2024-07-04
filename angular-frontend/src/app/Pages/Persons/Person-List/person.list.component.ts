@@ -40,14 +40,14 @@ export class PersonListComponent implements OnInit {
 
             },
             error: (err: any) => {
-                throw new Error();
                 this.isLoading = false;
                 console.log(err);
                 this.feedback = {
-                    feedbackType: err.type,
-                    feedbackmsg: err.msg,
+                    feedbackType: err.feedbackType,
+                    feedbackmsg: err.feedbackmsg,
                 };
-                
+                console.log(JSON.stringify(this.feedback));
+                throw new Error();
             },
             complete: () => {
                 this.isLoading = true;
@@ -67,8 +67,8 @@ export class PersonListComponent implements OnInit {
                     this.isLoading = false;
                     console.log(err);
                     this.feedback = {
-                        feedbackType: err.type,
-                        feedbackmsg: err.msg,
+                        feedbackType: err.feedbackType,
+                        feedbackmsg: err.feedbackmsg,
                     };
                     throw new Error();
                 }

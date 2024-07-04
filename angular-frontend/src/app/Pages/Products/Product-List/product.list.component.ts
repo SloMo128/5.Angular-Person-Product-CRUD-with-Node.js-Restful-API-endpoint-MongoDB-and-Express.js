@@ -73,8 +73,8 @@ export class ProductListComponent implements OnInit {
                     this.isLoadingProduct = false;
                     console.log(err);
                     this.feedback = {
-                        feedbackType: err.type,
-                        feedbackmsg: err.msg,
+                        feedbackType: err.feedbackType,
+                        feedbackmsg: err.feedbackmsg,
                     };
                     throw new Error();
                 }
