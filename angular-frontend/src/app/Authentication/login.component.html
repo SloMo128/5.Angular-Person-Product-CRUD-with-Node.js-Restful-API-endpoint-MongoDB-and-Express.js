@@ -1,3 +1,16 @@
+<div *ngIf="!isLoading && feedback.feedbackType === 'error'" class="text-center">
+   <div class="alert alert-success" [ngClass]="feedback.feedbackType === 'success'
+             ? 'alert-success'
+             : 'alert-danger'
+         " role="alert" style="height: 50px" [ngStyle]="!feedback.feedbackmsg">
+     {{
+     feedback.feedbackType === "error"
+     ? feedback.feedbackmsg + " Please try again later."
+     : ""
+     }}
+   </div>
+ </div>
+
 <!-- Page Content -->
 <div class="container">
     <div class="row">

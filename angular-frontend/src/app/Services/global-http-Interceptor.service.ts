@@ -8,8 +8,7 @@ import { FeedBack } from "../Models/feedback";
 @Injectable()
 export class GlobalHttpInterceptorService implements HttpInterceptor {
 
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) { }
 
   //1.  No Errors
   /*intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -63,16 +62,30 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
               feedback.feedbackmsg = 'Impossibile connetersi al server.';
               break;
             case 401:
+              this.router.navigateByUrl("/login");
               feedback.feedbackmsg = 'Non autorizzato. La richiesta non contiene credenziali di autenticazione valide.';
               break;
             case 402:
-                feedback.feedbackmsg = "La risorsa è accessibile solo attraverso pagamento mediante digital cash e micropagamento";
-                break;
+              feedback.feedbackmsg = "La risorsa è accessibile solo attraverso pagamento mediante digital cash e micropagamento";
+              break;
             case 403:
+              this.router.navigateByUrl("/login");
               feedback.feedbackmsg = "L' accesso alla risorsa definita è negato: le credenziali di autenticazione utilizzate per stabilire la connessione non consentono l'accesso alle risorse specificate nella richiesta.";
               break;
             case 404:
               feedback.feedbackmsg = 'La risorsa richiesta non è stata trovata. La richiesta potrebbe essere stata eliminata.';
+              break;
+            case 405:
+              feedback.feedbackmsg = 'La richiesta è stata eseguita usando un metodo non permesso. Ad esempio questo accade quando si usa il metodo GET per inviare dati da presentare con un metodo POST.';
+              break;
+            case 406:
+              feedback.feedbackmsg = 'Il tipo di accettazione richiesto non è supportato.';
+              break;
+            case 407:
+              feedback.feedbackmsg = 'Per proseguire, il client deve autenticarsi sul proxy.';
+              break;
+            case 408:
+              feedback.feedbackmsg = 'Il tempo per inviare la richiesta è scaduto e il server ha terminato la connessione.';
               break;
             case 500:
               feedback.feedbackmsg = 'Errore server interno.';

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../Services/auth.service';
 import { Router } from '@angular/router';
 import { UserLogin } from '../Models/user.login';
+import { FeedBack } from '../Models/feedback';
 
 @Component({
    selector: 'app-login',
@@ -14,6 +15,8 @@ export class LoginComponent implements OnInit {
 
    formData: FormGroup;
    userLogin = new UserLogin('', '');
+   feedback = new FeedBack("", "");
+   isLoading: boolean = true;
 
    constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
 
@@ -41,7 +44,17 @@ export class LoginComponent implements OnInit {
                      window.location.reload();
                   });
             }
-         }
+         },
+         error: (err: any) => {
+            this.isLoading = false;
+            this.feedback = {
+                feedbackType: err.feedbackType,
+                feedbackmsg: err.feedbackmsg,
+            };
+
+            this.formData.reset();
+            throw new Error();
+        }
       })
    }
 }
